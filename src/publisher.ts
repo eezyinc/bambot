@@ -1,11 +1,11 @@
-import { envVar } from "@therockstorm/utils"
 import { Day, Employee, Holiday, SlackableEmp } from "."
 import { postMsg } from "./http"
 import { toHolidaysMsg, toSlackMsg } from "./mapper"
 import { ordinal } from "./ordinal"
+import { getEnv } from "./envWrapper"
 
 const D_FORMAT = "dddd"
-const WEBHOOK_URL = envVar("SLACK_WEBHOOK_URL")
+const WEBHOOK_URL = getEnv("SLACK_WEBHOOK_URL")
 
 export const timeOffAndCelebrations = async (
   es: Employee[],
