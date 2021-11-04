@@ -1,4 +1,3 @@
-import { error } from "@therockstorm/utils"
 import { Handler } from "aws-lambda"
 import dayjs from "dayjs"
 import "source-map-support/register"
@@ -16,7 +15,7 @@ export const handle: Handler = async () => {
     ])
     return { success: true }
   } catch (e) {
-    error(e)
+    console.error(e)
     throw e
   }
 }
