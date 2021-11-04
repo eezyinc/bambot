@@ -1,23 +1,24 @@
-import * as utils from "@therockstorm/utils"
 import dayjs from "dayjs"
 import { Employee } from "../src"
 import * as colorMod from "../src/color"
 import * as http from "../src/http"
-jest.mock("@therockstorm/utils")
+import { getEnv } from "../src/envWrapper"
+jest.mock("../src/envWrapper")
 jest.mock("../src/http")
 jest.mock("../src/color")
-const envVar = utils.envVar as jest.Mock
+const getEnvMock = getEnv as jest.Mock
 const postMsg = http.postMsg as jest.Mock
 const color = colorMod.rndColor as jest.Mock
 const COLOR = "#000"
 const URL = "env-var"
-envVar.mockReturnValue(URL)
+getEnvMock.mockReturnValue(URL)
 color.mockReturnValue(() => COLOR)
 import { holidays, timeOffAndCelebrations } from "../src/publisher"
 
 afterEach(() => postMsg.mockClear())
 
-test("envVar", () => expect(envVar).toHaveBeenCalledWith("SLACK_WEBHOOK_URL"))
+test("getEnv", () =>
+  expect(getEnvMock).toHaveBeenCalledWith("SLACK_WEBHOOK_URL"))
 
 test("publish celebrations", async () => {
   const today = dayjs()
