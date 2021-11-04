@@ -21,7 +21,7 @@
     "dot-prop": ">=5.3.0",
     "elliptic": ">=6.5.3",
     "kind-of": "^6.0.3",
-    "lodash": ">=4.17.19",
+    "lodash": ">=4.17.21",
     "source-map-support": "^0.5.19",
     "xml2js-es6-promise": "^1.1.1"
   },
