@@ -1,21 +1,21 @@
-import * as utils from "@therockstorm/utils"
 import dayjs from "dayjs"
 import * as http from "../src/http"
+import { getEnv } from "../src/envWrapper"
 jest.mock("axios")
-jest.mock("@therockstorm/utils")
+jest.mock("../src/envWrapper")
 jest.mock("../src/http")
-const envVar = utils.envVar as jest.Mock
+const getEnvMock = getEnv as jest.Mock
 const getJson = http.getJson as jest.Mock
 const getXml = http.getXml as jest.Mock
-envVar.mockReturnValue("env-var")
+getEnvMock.mockReturnValue("env-var")
 import { employees, holidaysAndTimeOff } from "../src/fetcher"
 
 const YMD_FORMAT = "YYYY-MM-DD"
 const BASE_URL = `https://env-var:x@api.bamboohr.com/api/gateway.php/env-var/v1`
 
-test("envVar", () => {
-  expect(envVar).toHaveBeenCalledWith("BAMBOOHR_KEY")
-  expect(envVar).toHaveBeenCalledWith("BAMBOOHR_SUBDOMAIN")
+test("getEnv", () => {
+  expect(getEnvMock).toHaveBeenCalledWith("BAMBOOHR_KEY")
+  expect(getEnvMock).toHaveBeenCalledWith("BAMBOOHR_SUBDOMAIN")
 })
 
 test("employees", async () => {

@@ -1,14 +1,14 @@
-import { envVar } from "@therockstorm/utils"
 import { TaskQueue } from "cwait"
 import dayjs from "dayjs"
 import { Day, Emp, WhosOut } from "."
 import { getJson, getXml } from "./http"
+import { getEnv } from "./envWrapper"
 
 const CONCURRENCY = 15
 const YMD_FORMAT = "YYYY-MM-DD"
-const BASE_URL = `https://${envVar(
+const BASE_URL = `https://${getEnv(
   "BAMBOOHR_KEY"
-)}:x@api.bamboohr.com/api/gateway.php/${envVar("BAMBOOHR_SUBDOMAIN")}/v1`
+)}:x@api.bamboohr.com/api/gateway.php/${getEnv("BAMBOOHR_SUBDOMAIN")}/v1`
 
 export const employees = async (): Promise<Emp[]> =>
   await Promise.all<Emp>(
