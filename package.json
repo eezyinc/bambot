@@ -22,7 +22,7 @@
     "elliptic": ">=6.5.4",
     "kind-of": "^6.0.3",
     "lodash": ">=4.17.21",
-    "source-map-support": "^0.5.19",
+    "source-map-support": "^0.5.20",
     "xml2js-es6-promise": "^1.1.1"
   },
   "devDependencies": {
