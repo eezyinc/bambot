@@ -13,7 +13,6 @@ const es = [
   },
 ]
 const wo = {
-  holidays: [],
   timeOff: {},
 }
 

@@ -3,7 +3,6 @@ import {
   Day,
   Emp,
   Employee,
-  Holiday,
   SlackableEmp,
   SlackMsg,
   TimeOff,
@@ -50,9 +49,6 @@ export const toEmployees = (es: Emp[], wo: WhosOut, today: Day): Employee[] => {
         const end = d.add(1, "day")
         const ret = end.add(isSat(end) ? 2 : isSun(end) ? 1 : 0, "day")
 
-        const hol = wo.holidays.filter((h) => ret.isSame(h.date))[0]
-        if (hol) return returnDateRec(hol.date)
-
         const fTo = empFutureTo
           .filter((f) => !f.startDate.isAfter(ret) && !f.endDate.isBefore(ret))
           .sort((a, b) => a.endDate.diff(b.endDate, "day"))[0]
@@ -71,20 +67,6 @@ export const toEmployees = (es: Emp[], wo: WhosOut, today: Day): Employee[] => {
       returnDate: present.length ? returnDate(present[0]) : undefined,
     }
   })
-}
-
-export const toHolidaysMsg = (holidays: Holiday[]): SlackMsg => {
-  const rc = rndColor()
-  return holidays.length
-    ? {
-        attachments: holidays.map((h) => ({
-          author_name: h.name,
-          color: rc(0),
-          fallback: h.name,
-        })),
-        text: "Company-Observed Holiday",
-      }
-    : {}
 }
 
 export const toSlackMsg = (text: string, es: SlackableEmp[]): SlackMsg => {

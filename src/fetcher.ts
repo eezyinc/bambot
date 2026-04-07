@@ -34,8 +34,8 @@ export const employees = async (): Promise<Emp[]> =>
       )
   )
 
-export const holidaysAndTimeOff = async (today: Day): Promise<WhosOut> => {
-  const empty = { holidays: [], timeOff: {} } as WhosOut
+export const whosOut = async (today: Day): Promise<WhosOut> => {
+  const empty = { timeOff: {} } as WhosOut
   const is = (
     await getXml<WhosOutRes>(
       `${BASE_URL}/time_off/whos_out/?end=${today
@@ -45,9 +45,7 @@ export const holidaysAndTimeOff = async (today: Day): Promise<WhosOut> => {
   ).calendar.item
   return is
     ? is.reduce((res, i) => {
-        if (i.$.type === "holiday" && i.holiday) {
-          res.holidays.push({ name: i.holiday[0]._, date: dayjs(i.start[0]) })
-        } else if (i.$.type === "timeOff" && i.employee) {
+        if (i.$.type === "timeOff" && i.employee) {
           const id = i.employee[0].$.id
           const obj = {
             endDate: dayjs(i.end[0]),
@@ -91,7 +89,6 @@ type WhosOutRes = Readonly<{
       start: string[]
       end: string[]
       employee?: { _: string; $: { id: string } }[]
-      holiday?: { _: string; $: { id: string } }[]
     }[]
   }
 }>

@@ -8,7 +8,7 @@ const getEnvMock = getEnv as jest.Mock
 const getJson = http.getJson as jest.Mock
 const getXml = http.getXml as jest.Mock
 getEnvMock.mockReturnValue("env-var")
-import { employees, holidaysAndTimeOff } from "../src/fetcher"
+import { employees, whosOut } from "../src/fetcher"
 
 const YMD_FORMAT = "YYYY-MM-DD"
 const BASE_URL = `https://env-var:x@api.bamboohr.com/api/gateway.php/env-var/v1`
@@ -49,11 +49,10 @@ test("employees", async () => {
   )
 })
 
-test("holidaysAndTimeOff", async () => {
+test("whosOut", async () => {
   const today = dayjs().startOf("day")
   const t = today
   const exp = {
-    holidays: [{ name: "Thanksgiving Day", date: t }],
     timeOff: { "my-id": [{ id: "my-id", startDate: t, endDate: t }] },
   }
   const to = exp.timeOff["my-id"][0]
@@ -64,15 +63,10 @@ test("holidaysAndTimeOff", async () => {
       end: [to.endDate],
       start: [to.startDate],
     },
-    {
-      $: { type: "holiday" },
-      holiday: [{ _: exp.holidays[0].name }],
-      start: [exp.holidays[0].date],
-    },
   ]
   getXml.mockResolvedValue({ calendar: { item: outRes } })
 
-  expect(await holidaysAndTimeOff(today)).toEqual(exp)
+  expect(await whosOut(today)).toEqual(exp)
 
   expect(getXml).toHaveBeenCalledWith(
     `${BASE_URL}/time_off/whos_out/?end=${t.add(1, "month").format(YMD_FORMAT)}`

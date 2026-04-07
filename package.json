@@ -1,7 +1,7 @@
 {
   "name": "bambot",
   "version": "1.0.0",
-  "description": "BambooHR Slack bot publishes company holidays, work anniversaries, first days, birthdays, and who is out each weekday.",
+  "description": "BambooHR Slack bot publishes work anniversaries, first days, birthdays, and who is out each weekday.",
   "license": "MIT",
   "scripts": {
     "build": "sls webpack",
