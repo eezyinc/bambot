@@ -13,7 +13,7 @@ const COLOR = "#000"
 const URL = "env-var"
 getEnvMock.mockReturnValue(URL)
 color.mockReturnValue(() => COLOR)
-import { holidays, timeOffAndCelebrations } from "../src/publisher"
+import { timeOffAndCelebrations } from "../src/publisher"
 
 afterEach(() => postMsg.mockClear())
 
@@ -50,16 +50,5 @@ test("publish celebrations", async () => {
       },
     ],
     text: ":tada: Celebrations :tada:",
-  })
-})
-
-test("publish holidays", async () => {
-  const name = "Halloween"
-
-  await holidays([{ name, date: dayjs() }], dayjs())
-
-  expect(postMsg).toHaveBeenCalledWith(URL, {
-    attachments: [{ fallback: name, author_name: name, color: COLOR }],
-    text: "Company-Observed Holiday",
   })
 })

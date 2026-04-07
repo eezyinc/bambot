@@ -16,13 +16,7 @@ export type TimeOff = Readonly<{
   startDate: Day
 }>
 
-export type Holiday = Readonly<{
-  date: Day
-  name: string
-}>
-
 export type WhosOut = Readonly<{
-  holidays: Holiday[]
   timeOff: { [id: string]: TimeOff[] }
 }>
 

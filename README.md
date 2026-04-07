@@ -5,7 +5,6 @@ BambooHR Slack bot that, each weekday, publishes
 - Who is out
 - Birthdays
 - Work anniversaries, including a welcome message on the first day
-- Company-observed holidays
 
 <img src="screenshot.png" alt="Slack screenshot of bambot message" width="512" style="border: none;"/>
 
@@ -21,4 +20,4 @@ BambooHR Slack bot that, each weekday, publishes
 ## Developing
 
 - Run tests, `npm test`
-- Invoke locally, `npm run invoke`
+- Run locally, `./run-local.sh <BAMBOOHR_KEY> <BAMBOOHR_SUBDOMAIN> <SLACK_WEBHOOK_URL>`

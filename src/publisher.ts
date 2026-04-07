@@ -1,6 +1,6 @@
-import { Day, Employee, Holiday, SlackableEmp } from "."
+import { Day, Employee, SlackableEmp } from "."
 import { postMsg } from "./http"
-import { toHolidaysMsg, toSlackMsg } from "./mapper"
+import { toSlackMsg } from "./mapper"
 import { ordinal } from "./ordinal"
 import { getEnv } from "./envWrapper"
 
@@ -48,9 +48,3 @@ export const timeOffAndCelebrations = async (
   )
   await postMsg(WEBHOOK_URL, toSlackMsg(":tada: Celebrations :tada:", d.c))
 }
-
-export const holidays = async (hs: Holiday[], today: Day): Promise<void> =>
-  await postMsg(
-    WEBHOOK_URL,
-    toHolidaysMsg(hs.filter((h) => today.isSame(h.date)))
-  )
