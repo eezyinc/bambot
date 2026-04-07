@@ -20,4 +20,4 @@ BambooHR Slack bot that, each weekday, publishes
 ## Developing
 
 - Run tests, `npm test`
-- Invoke locally, `npm run invoke`
+- Run locally, `./run-local.sh <BAMBOOHR_KEY> <BAMBOOHR_SUBDOMAIN> <SLACK_WEBHOOK_URL>`
